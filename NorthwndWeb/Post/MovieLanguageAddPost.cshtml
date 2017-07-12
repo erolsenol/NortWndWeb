@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Film Dili eklendi</title>
+    <meta charset="utf-8">
+    <link href="~/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    @if (IsPost)
+    {
+        NorthwndWeb.DataContext db = new NorthwndWeb.DataContext();
+
+        NorthwndWeb.Entities.MovieLanguage movieLanguageAdd = new NorthwndWeb.Entities.MovieLanguage();
+
+        //int filmDilId = db.MovieLanguage.ToList().Count();
+        //movieLanguageAdd.FilmDilId = filmDilId++;
+
+        string filmDili = Request.Form["filmDil"];
+        movieLanguageAdd.FilmDil = filmDili;
+        db.MovieLanguage.Add(movieLanguageAdd);
+        db.SaveChanges();
+
+    }
+    <a class="btn btn-default" href="~/DataAdd.cshtml" role="button">Geri Gel</a>
+
+</body>
+</html>

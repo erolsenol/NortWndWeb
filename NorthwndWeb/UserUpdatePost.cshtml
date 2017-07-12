@@ -1,0 +1,68 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="~/js/bootstrap.min.js"></script>
+    <script src="~/js/jquery.min.js"></script>
+    <link href="~/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/css/my.css" rel="stylesheet">
+</head>
+<body>
+    
+    @if (IsPost)
+    {
+        string kadi = Request.Form["kadi"];
+        string ksifre = Request.Form["kmail"];
+        string kmail = Request.Form["ksifre"];
+
+        using (var ctx = new NorthwndWeb.DataContext())
+        {
+            var update = (from s in ctx.Users where s.UserName == kadi select s).FirstOrDefault();
+            update.UserMail = kmail;
+            update.UserPass = ksifre;
+            ctx.SaveChanges();
+
+        }
+    }
+    
+    @{
+        NorthwndWeb.DataContext db = new NorthwndWeb.DataContext();
+        var kullanicilar = db.Users.ToList();
+    }
+   
+
+    <div class="row">
+        En Yeni Filmler
+        <div class="col-md-8">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Kategori Id</th>
+                        <th>Kategori Adı</th>
+                        <th>Açıklama</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var k in kullanicilar)
+                    {
+                        <tr>
+                            <td>@k.UserName</td>
+                            <td>@k.UserMail</td>
+                            <td>@k.UserPass</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+                    <h1>@kullanicilar.Count</h1>
+    <a class="btn btn-default" href="~/UserUpdate.cshtml" role="button">Geri Gel</a>
+
+
+</body>
+
+</html>

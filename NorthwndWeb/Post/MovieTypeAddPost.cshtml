@@ -1,0 +1,24 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Film Türü Eklendi</title>
+    <meta charset="utf-8">
+    <link href="~/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    @if (IsPost)
+    {
+        NorthwndWeb.DataContext db = new NorthwndWeb.DataContext();
+
+        NorthwndWeb.Entities.MovieType movieTypeAdd = new NorthwndWeb.Entities.MovieType();
+
+        
+        string filmTipi = Request.Form["filmTip"];  
+        movieTypeAdd.MovieTypeName = filmTipi;
+        db.MovieTypes.Add(movieTypeAdd);
+        db.SaveChanges();
+
+    }
+     <a class="btn btn-default" href="~/DataAdd.cshtml" role="button">Geri Gel</a>
+</body>
+</html>

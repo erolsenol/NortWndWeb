@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="~/js/bootstrap.min.js"></script>
+    <script src="~/js/jquery.min.js"></script>
+    <link href="~/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/css/my.css" rel="stylesheet">
+</head>
+<body>
+  @{ 
+        NorthwndWeb.DataContext dbListele = new NorthwndWeb.DataContext();
+        var kullanicilar = dbListele.Users.ToList();
+
+    }
+
+    <div class="row">
+        En Yeni Filmler
+        <div class="col-md-8">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Kategori Id</th>
+                        <th>Kategori Adı</th>
+                        <th>Açıklama</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var k in kullanicilar)
+                    {
+                        <tr>
+                            <td>@k.UserName</td>
+                            <td>@k.UserMail</td>
+                            <td>@k.UserPass</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <h1>@kullanicilar.Count</h1>
+    <form class="form-horizonta" method="post" action="~/UserUpdatePost.cshtml">
+        <div class="container">
+            <div class="form-group">
+                <label for="kadi" class="col-sm-2 control-label">Kullaıcı Adı</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="kadi" placeholder="Nick" name="kadi">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="kmail" class="col-sm-2 control-label">E-Posta</label>
+                <div class="col-sm-10">
+                    <input type="email" class="form-control" id="kmail" placeholder="E-Mail" name="kmail">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="ksifre" class="col-sm-2 control-label">Yeni Şifre</label>
+                <div class="col-sm-10">
+                    <input type="password" class="form-control" id="ksifre" placeholder="Password" name="ksifre">
+                </div>
+            </div>
+            <input type="submit" class="btn btn-lg btn-success" value="Güncelle" accesskey="enter" formtarget="_self" />
+        </div>
+    </form>
+
+</body>
+</html>

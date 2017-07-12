@@ -1,0 +1,50 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    
+    <meta name="viewport" content="width=device-width" />
+    <title>Kayıt Ol</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="~/js/bootstrap.min.js"></script>
+    <script src="~/js/jquery.min.js"></script>
+    <link href="~/css/bootstrap.min.css" rel="stylesheet">
+    <link href="signin.css" rel="stylesheet">
+</head>
+<body>
+        <div class="container">
+            <form class="form-control-static" method="post" action="~/UserAddPost..cshtml">
+                    <h2 class="form-signin-heading">Üyelik Formu</h2>
+                <div class="form-signin">
+                    <label class="sr-only" for="UserName"> Kullanıcı Adı </label>
+                    <input type="text" class="form-control" id="UserName" name="UserName" placeholder="Nickiniz özel karakter bulundurmamalı ve en az 4 karakter olmalıdır." />
+                </div>
+
+                <div class="form-signin">
+                    <label class="sr-only" for="EMail"> E-Posta </label>
+                    <input type="text" class="form-control" id="EMail" name="EMail" placeholder="deneme@gmail.com" />
+                </div>
+
+                <div class="form-signin">
+                    <label class="sr-only" for="Pas"> Parola </label>
+                    <input type="password" class="form-control" id="Pas" placeholder="En az 4 karakterden oluşan bir parola seçin." />
+                    <input type="password" class="form-control" id="Pass" name="Pass" placeholder="Parolanızı tekrar girin." />
+                </div>
+                <div>
+                    <button class="btn btn-lg btn-primary btn-block" type="submit">Kayıt Ol</button>
+                </div>
+            </form>
+</div>
+
+        
+
+        
+    
+</body>
+</html>

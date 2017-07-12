@@ -1,0 +1,218 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta name="author" content="">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- CSS -->
+    <link href="~/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/css/navbar-fixed-top.css" rel="stylesheet">
+    <link href="~/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+    <link href="~/css/carousel.css" rel="stylesheet">
+    <link href="~/css/my.css" rel="stylesheet">
+</head>
+<body>
+ @{ 
+     NorthwndWeb.DataContext db = new NorthwndWeb.DataContext();
+     var filmler = db.Movies.ToList();
+     var kategori = db.MovieTypes.ToList();
+
+ }
+     
+ 
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Bootstrap theme</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Kategoriler<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            @foreach (var kate in kategori)
+                            {
+                                <li><a href="#">@kate.MovieTypeName</a></li>
+                            }
+                            <li role="separator" class="divider"></li>
+                            <li class="dropdown-header">Nav header</li>
+                            <li><a href="#">Separated link</a></li>
+                            <li><a href="#">One more separated link</a></li>
+                        </ul>
+                    </li>
+                    
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Arama Motoru<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><input type="text" class="form-control" id="fisimara" placeholder="Film İsmi"></li>
+                            <li>
+
+                                <!--@@@@ Sıkıntı var @@@@-->
+                               <select class="form-control">
+                                    @foreach (var kategoriAra in kategori)
+                                    {
+                                        <option>@kategoriAra.MovieTypeName</option>
+                                    }
+                                </select>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div><!--/.nav-collapse -->
+        </div>
+    </nav>
+   
+    <!-- @@@@@@@@@@@@@@@@@@@@@@@@Başlangıç@@@@@@@@@@@@@@@@@@@@@@@@ -->
+    <div class="container-fluid">
+        
+
+
+            <div class="container-fluid" style="background-color:rgba(159, 159, 159, 0.50); padding-left:20px;">
+                <div class="col-xs-18 col-md-12 col-sm-12">
+                    
+                        <h5 style="">En Yeni Filmler</h5>
+                   
+                </div>
+                @foreach (var film in filmler)
+                {
+
+                    //System.Drawing.Image.FromStream(stream);
+                    <div class="col-xs-6 col-md-3 col-lg-2 col-sm-4">
+                        <a href="#">
+                            <img src="~/filmresim/@film.FilmResmi" alt="" class="img-rounded mx-auto d-block" style="width:210px;height:280px">
+                            <div class="caption">
+
+
+                                <h4><strong><a href="#">@film.FilmAdi<span> - HD </span></a></strong></h4>
+                                @*<span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
+                <span class="text-center"><a href="#">@film.MovieType.MovieTypeName</a> </span><br />
+                <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
+                <span class="text-center"><a href="#">@film.MovieLanguage.FilmDil</a></span><br />
+                <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
+                <span class="text-center"><a href="#">@film.FilmPuani</a></span><br />
+                <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
+                <span class="text-center"><a href="#">@film.Filmyili</a></span><br />
+                <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
+                <span class="text-center"><a href="#">@film.Director.directorName</a> </span><br />
+                <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
+                <span class="text-center"><a href="#">@DateTime.Now</a></span>*@
+
+                                @*<ul class="list-unstyled">
+                    <li class="text-center lead " ><a href="#">Korku Filmleri</a></li>
+                    <li class="text-center lead"><a href="#">Türkçe Dublaj</a></li>
+                    <li class="text-center lead"><a href="#">Gösterim Tarihi</a></li>
+                    <li class="text-center lead "><a href="#">Eklenme Tarihi</a></li>
+                </ul>*@
+
+                            </div>
+
+                            @*<div class="space-ten"></div>*@
+                            <div class="btn-ground text-center">
+                                <button type="button" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>Filmi İzle</button>
+                            </div>
+                        </a>
+                        @*<div class="space-ten"></div>*@
+
+                    </div>
+                }
+            </div>
+        </div>
+    
+
+        <button id="js-test" class="btn btn-primary"> Js çalıştır</button>
+   
+    @{ 
+//NorthwndWeb.DataContext db = new NorthwndWeb.DataContext();
+//var movie = db.Movies.Find("3cdc748a-3f46-47db-ada4-994977a5ebde");
+//var mLanguage = movie.MovieLanguage.FilmDil;
+//var mTypeName = movie.MovieType.MovieTypeName;
+    }
+
+
+    @*<h1>@mTypeName</h1><br />
+    <h1>@mLanguage</h1>*@
+    <script>
+        $('#myModal').on('shown.bs.modal', function () {
+            $('#myInput').focus()
+        })
+    </script>
+    <!-- script -->
+    <script src="~/js/myJV.js"></script>
+    <script src="~/js/jquery.min.js"></script>
+    <script src="~/js/tether.min.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+    <script src="~/js/holder.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                console.log("ready!");
+            });
+
+            $("#js-test").on("click", function () {
+                console.log("Butona tıklandı");
+            });
+        </script>
+    <script>
+            $(".dropdown-menu li a").click(function () {
+                var selText = $(this).text();
+                $(this).parents('.btn-group').find('.dropdown-toggle').html(selText + ' <span class="caret"></span>');
+            });
+    </script>
+    <!-- @@@@ select scriptleri @@@@-->
+    <script>
+            $(document).ready(function () {
+                $(".btn-select").each(function (e) {
+                    var value = $(this).find("ul li.selected").html();
+                    if (value != undefined) {
+                        $(this).find(".btn-select-input").val(value);
+                        $(this).find(".btn-select-value").html(value);
+                    }
+                });
+            });
+
+            $(document).on('click', '.btn-select', function (e) {
+                e.preventDefault();
+                var ul = $(this).find("ul");
+                if ($(this).hasClass("active")) {
+                    if (ul.find("li").is(e.target)) {
+                        var target = $(e.target);
+                        target.addClass("selected").siblings().removeClass("selected");
+                        var value = target.html();
+                        $(this).find(".btn-select-input").val(value);
+                        $(this).find(".btn-select-value").html(value);
+                    }
+                    ul.hide();
+                    $(this).removeClass("active");
+                }
+                else {
+                    $('.btn-select').not(this).each(function () {
+                        $(this).removeClass("active").find("ul").hide();
+                    });
+                    ul.slideDown(300);
+                    $(this).addClass("active");
+                }
+            });
+
+            $(document).on('click', function (e) {
+                var target = $(e.target).closest(".btn-select");
+                if (!target.length) {
+                    $(".btn-select").removeClass("active").find("ul").hide();
+                }
+            });
+
+    </script>
+</body>
+</html>

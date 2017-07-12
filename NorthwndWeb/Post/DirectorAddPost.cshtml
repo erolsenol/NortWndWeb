@@ -1,0 +1,21 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link href="~/css/bootstrap.min.css" rel="stylesheet">
+    <title>Yönetmen Eklendi</title>
+</head>
+<body>
+    @if (IsPost)
+    {
+        NorthwndWeb.DataContext db = new NorthwndWeb.DataContext();
+        NorthwndWeb.Entities.Director Directors = new NorthwndWeb.Entities.Director();
+
+        string yonetmenAdi = Request.Form["yonetmenAdi"];
+        Directors.directorName = yonetmenAdi;
+        db.Directors.Add(Directors);
+        db.SaveChanges();
+    }
+    <a class="btn btn-default" href="~/DataAdd.cshtml" role="button">Geri Gel</a>
+</body>
+</html>

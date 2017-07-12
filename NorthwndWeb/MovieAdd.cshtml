@@ -1,0 +1,132 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Kayıt Ol</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="~/js/bootstrap.min.js"></script>
+    <script src="~/js/jquery.min.js"></script>
+    <link href="~/css/bootstrap.min.css" rel="stylesheet">
+    <link href="signin.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link href='https://fonts.googleapis.com/css?family=Passion+One' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
+    <title>Film Ekle</title>
+</head>
+<body>
+    @{ 
+        NorthwndWeb.DataContext db = new NorthwndWeb.DataContext();
+        var turler = db.MovieTypes.ToList();
+        var diller = db.MovieLanguage.ToList();
+        var yonetmen = db.Directors.ToList();
+    }
+    <div class="row">
+        <div class="container">
+            <div class="col-md-4">
+                <div class="main-login main-center">
+                    <h5>Film Ekleyin</h5>
+                    <form class="" method="post" action="~/Post/MovieAddPost.cshtml" enctype="multipart/form-data" name="MovieAdd">
+                        <div class="form-group">
+                            <label class="cols-sm-2 control-label" for="filmResim">Film Resmi</label>
+                            <div class="cols-sm-10">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                                    <input type="file" id="filmResim" name="filmResim">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="cols-sm-2 control-label" for="filmAdi">Film Adı</label>
+                            <div class="cols-sm-10">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+                                    <input type="text" class="form-control" id="filmAdi" name="filmAdi">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="filmTuru">Film Türü</label>
+                            <select class="form-control" id="filmTuru" name="filmTuru">
+                                @foreach (var tur in turler)
+                                {
+                                    <option value="@tur.MovieTypeId">@tur.MovieTypeName</option>
+                                }
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="cols-sm-2 control-label" for="filmPuan">Film Puanı</label>
+                            <div class="cols-sm-10">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
+                                    <input type="text" class="form-control" id="filmPuan" name="filmPuan">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="cols-sm-2 control-label" for="filmDili">Film Dili</label>
+                            <div class="cols-sm-10">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                                    <select id="filmDili" name="filmDili" class="form-control">
+                                        @foreach (var dil in diller)
+                                        {
+                                            <option value="@dil.FilmDilId">@dil.FilmDil</option>
+                                        }
+                                        </select> 
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="cols-sm-2 control-label" for="filmYili">Film Yılı</label>
+                            <div class="cols-sm-10">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                                    <input type="text" class="form-control" id="filmYili" name="filmYili">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="cols-sm-2 control-label" for="yonetmen">Yönetmen</label>
+                            <div class="cols-sm-10">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                                    <select id="filmYonetmen" name="filmYonetmen" class="form-control">
+                                        @foreach (var yonet in yonetmen)
+                                        {
+                                            <option value="@yonet.directorId">@yonet.directorName</option>
+                                        }
+                                    </select> 
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="cols-sm-2 control-label" for="filmOzet">Film Özeti</label>
+                            <div class="cols-sm-10">
+                                <div class="input-group">
+                                    <textarea class="form-control" rows="3" id="filmOzet" name="filmOzet"></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary btn-lg btn-block login-button" name="filmEkle">Gönder Gelsin</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

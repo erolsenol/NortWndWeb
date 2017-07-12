@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+    @if (IsPost)
+    {
+        NorthwndWeb.DataContext db = new NorthwndWeb.DataContext();
+        NorthwndWeb.Entities.Comment yorum = new NorthwndWeb.Entities.Comment();
+
+        int commetId = 5;
+        string comment = Request.Form["yorum"];
+        string rumuz = Request.Form["nick"];
+        string mail = Request.Form["mail"];
+
+        yorum.filmIdComment = commetId;
+        yorum.yorum = comment;
+        yorum.nick = rumuz;
+        yorum.mail = mail;
+        db.Comments.Add(yorum);
+        db.SaveChanges();
+    }
+    <a class="btn btn-default" href="~/Deneme.cshtml" role="button">Geri Gel</a>
+
+</body>
+</html>

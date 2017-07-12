@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Film Eklendi</title>
+    <meta charset="utf-8">
+    <link href="~/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    @if (IsPost)
+    {
+        NorthwndWeb.DataContext db = new NorthwndWeb.DataContext();
+        string FilmResim = Request.Form["filmResim"];
+        string FilmAdi = Request.Form["filmAdi"];
+
+        WebImage photo = null;
+        var resimAdi = "";
+        var imagePath = "";
+
+        photo = WebImage.GetImageFromRequest();
+        if (photo != null)
+        {
+            resimAdi = Guid.NewGuid().ToString() + "_" +
+                Path.GetFileName(photo.FileName);
+            imagePath = @"~\filmresim\" + resimAdi;
+            photo.Save(imagePath);
+        }
+
+        int FilmTuru = Int32.Parse(Request.Form["filmTuru"]);
+        string FilmPuan = Request.Form["filmPuan"];
+        int FilmDil = Int32.Parse(Request.Form["filmDili"]);
+        int FilmYonetmen = Int32.Parse(Request.Form["filmYonetmen"]);
+        string FilmYili = Request.Form["filmYili"];
+        string FilmOzet = Request.Form["filmOzet"];
+
+        NorthwndWeb.Entities.Movie movieYeni = new NorthwndWeb.Entities.Movie();
+
+        //movieYeni.FilmEkleTarih = DateTime.Now.GetDateTimeFormats();
+        movieYeni.FilmResmi = resimAdi;
+        movieYeni.FilmAdi = FilmAdi;
+        movieYeni.FilmPuani = FilmPuan;
+        movieYeni.FilmDili = FilmDil;
+        movieYeni.Filmyili = FilmYili;
+        movieYeni.FilmTipi = FilmTuru;
+        movieYeni.FilmYonetmen = FilmYonetmen;
+        movieYeni.FilmOzet = FilmOzet;
+
+
+        //movieAdd.MovieType.MovieTypeId = FilmTuru;
+
+        db.Movies.Add(movieYeni);
+        db.SaveChanges();
+    }
+    <a class="btn btn-default" href="~/MovieAdd.cshtml" role="button">Geri Gel</a>
+</body>
+</html>
