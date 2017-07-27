@@ -20,9 +20,6 @@ namespace NorthwndWeb.Entities
         [Column("nick")]
         public string nick { get; set; }
 
-        [Column("mail")]
-        public string mail { get; set; }
-
         public virtual Movie Movie { get; set; }
     }
 }

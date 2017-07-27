@@ -13,13 +13,7 @@
     <link href="signin.css" rel="stylesheet">
 </head>
 <body>
-    @{ 
-        NorthwndWeb.DataContext db = new NorthwndWeb.DataContext();
-        NorthwndWeb.Entities.MovieLanguage movLang = new NorthwndWeb.Entities.MovieLanguage();
-        NorthwndWeb.Entities.MovieType movType = new NorthwndWeb.Entities.MovieType();
-        NorthwndWeb.Entities.Director director = new NorthwndWeb.Entities.Director();
-
-    }
+   
     <div class="container">
         <div class="row">
             <div class="col-xs-9 col-md-6">
@@ -55,7 +49,7 @@
                 <h1>Dizi Ekle</h1>
             </div>
             <!-- @@@@@@ Yönetmen @@@@@@ -->
-            <form class="form-horizonta" method="post" action="~/Post/DirectorAddPost.cshtml">
+            <form class="form-horizonta">
                 <div class="col-xs-9 col-md-6">
                     <div class="form-group">
                         <label for="yonetmenAdi">Yönetmen Ekle</label>
@@ -79,18 +73,23 @@
             <button type="submit" class="btn btn-default" name="filmDilEkle">Gönder Gelsin</button>
         </div>
     </form>*@
-    @{
-        string yonetmenA;
+
+    @{ 
+        NorthwndWeb.DataContext db = new NorthwndWeb.DataContext();
+        NorthwndWeb.Entities.Director Directors = new NorthwndWeb.Entities.Director();
+        NorthwndWeb.Entities.MovieLanguage movLang = new NorthwndWeb.Entities.MovieLanguage();
+        NorthwndWeb.Entities.MovieType movType = new NorthwndWeb.Entities.MovieType();
     }
+    <!-- @@@@@@ Yönetmen Ekle @@@@@@ -->
     <script>
         $("#btn-yonetmen").on("click", function () {
             
-            yonetmenA = document.getElementById("yonetmenAdi").value;
-            @{
-                director.directorName = yonetmenA;
-                db.Directors.Add(director);
-                db.SaveChanges();
-            }
+            var yonetmenA = document.getElementById("yonetmenAdi").value;
+            window.alert(yonetmenA," Başarıyla Eklendi")
+           @Directors.directorName = yonetmenA;
+           @db.Directors.Add(Directors);
+           @db.SaveChanges();
+           window.alert(yonetmenA," Başarıyla Eklendi")
         });
         
     </script>
