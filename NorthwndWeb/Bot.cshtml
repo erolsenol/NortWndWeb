@@ -1,0 +1,91 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Veri Çek</title>
+</head>
+<body>
+    
+    @{
+        //Baslığı Çekiyor sadece 
+        @*string adres = "http://www.fullhdfilmizlesene.org/";
+        WebRequest istek = HttpWebRequest.Create(adres);
+        WebResponse cevap = istek.GetResponse();
+        StreamReader bilgiler = new StreamReader(cevap.GetResponseStream());
+        string gelen = bilgiler.ReadToEnd();
+        int baslangic = gelen.IndexOf("<title>") + 7;
+        int bitis = gelen.Substring(baslangic).IndexOf("</title>");
+        string baslik = gelen.Substring(baslangic, bitis);
+        <p>@baslik</p>*@
+
+
+
+        //System.Security.Policy.Url url = new System.Security.Policy.Url("http://www.fullhdfilmizlesene.org");
+        string url = "http://www.fullhdfilmizlesene.org/";
+        WebClient client = new WebClient();
+        string html = client.DownloadString(url);
+        HtmlAgilityPack.HtmlDocument dokuman = new HtmlAgilityPack.HtmlDocument();
+        dokuman.LoadHtml(html);
+        HtmlAgilityPack.HtmlNodeCollection basliklar = dokuman.DocumentNode.SelectNodes("//a");
+        foreach (var veri in basliklar)
+        {
+            string link = veri.Attributes["href"].Value;
+            <p>@veri.InnerText</p>
+        }
+
+        //İlk Örnek Çalışıyor Üstünde Uğraşılması gerek
+        @*string adres = "http://www.fullhdfilmizlesene.org/";
+        WebRequest webConnection = HttpWebRequest.Create(adres);
+        WebResponse webCevap = webConnection.GetResponse();
+        
+        StreamReader cevapOku = new StreamReader(webCevap.GetResponseStream());
+        string data = cevapOku.ReadToEnd();
+        int baslangicIndex = data.IndexOf("<span>") + 6;
+        int bitisIndex = data.Substring(baslangicIndex).IndexOf("span")-2;
+        <p>@data.Substring(baslangicIndex, bitisIndex)</p>*@
+
+        // İkinci Örnek Xml Sıkıntısı 
+    @*WebProxy wb = new WebProxy(WebProxy.GetDefaultProxy().Address);
+    WebClient wc = new WebClient();
+    wc.Proxy = wb;
+    string site = wc.DownloadString("http://www.fullhdfilmizlesene.org/");
+    System.Xml.XmlDocument xd = new System.Xml.XmlDocument();
+    xd.LoadXml(site);
+    System.Xml.XmlNodeList liste = xd.SelectNodes("div class='index - orta'/li");
+    <table>
+        <thead>
+            <tr>Resim Url</tr>
+            <tr>isim</tr>
+            <tr>link</tr>
+            <tr>tür</tr>
+            <tr>dil</tr>
+            <tr>yili</tr>
+        </thead>
+
+        @foreach (System.Xml.XmlNode item in liste)
+        {
+        string resim = item["img"] == null ? "" : item["img"].InnerText;
+        string isim = item["alt"].InnerText;
+        string link = item["a"].InnerText;
+        string tür = item["title='Gerilim Filmleri izle'"].InnerText;
+        string dil = item["span"].InnerText;
+        string yili = item["span"].InnerText;
+
+            <tr>
+                <td>@resim</td>
+                <td>@isim</td>
+                <td>@link</td>
+                <td>@tür</td>
+                <td>@dil</td>
+                <td>@yili</td>
+            </tr>
+
+        }
+    </table>*@
+    }
+
+    </body>
+    </html>

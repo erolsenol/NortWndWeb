@@ -9,13 +9,8 @@
     @if (IsPost)
     {
         NorthwndWeb.DataContext db = new NorthwndWeb.DataContext();
-
         NorthwndWeb.Entities.MovieLanguage movieLanguageAdd = new NorthwndWeb.Entities.MovieLanguage();
-
-        //int filmDilId = db.MovieLanguage.ToList().Count();
-        //movieLanguageAdd.FilmDilId = filmDilId++;
-
-        string filmDili = Request.Form["filmDil"];
+        string filmDili = Request.Form["LanguagePost"];
         movieLanguageAdd.FilmDil = filmDili;
         db.MovieLanguage.Add(movieLanguageAdd);
         db.SaveChanges();

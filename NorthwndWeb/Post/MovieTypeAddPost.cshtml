@@ -13,7 +13,7 @@
         NorthwndWeb.Entities.MovieType movieTypeAdd = new NorthwndWeb.Entities.MovieType();
 
         
-        string filmTipi = Request.Form["filmTip"];  
+        string filmTipi = Request.Form["TypePost"];  
         movieTypeAdd.MovieTypeName = filmTipi;
         db.MovieTypes.Add(movieTypeAdd);
         db.SaveChanges();

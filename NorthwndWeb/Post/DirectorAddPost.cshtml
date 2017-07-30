@@ -11,7 +11,7 @@
         NorthwndWeb.DataContext db = new NorthwndWeb.DataContext();
         NorthwndWeb.Entities.Director Directors = new NorthwndWeb.Entities.Director();
 
-        string yonetmenAdi = Request.Form["yonetmenAdi"];
+        string yonetmenAdi = Request.Form["directorPost"];
         Directors.directorName = yonetmenAdi;
         db.Directors.Add(Directors);
         db.SaveChanges();

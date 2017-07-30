@@ -7,8 +7,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="~/js/bootstrap.min.js"></script>
     <script src="~/js/jquery.min.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
     <link href="~/css/bootstrap.min.css" rel="stylesheet">
     <link href="signin.css" rel="stylesheet">
 </head>
@@ -23,23 +23,23 @@
                 <h1>Tür Ekle</h1>
             </div>
             <!-- @@@@@@ Dil Ekle @@@@@@ -->
-            <form class="form-horizonta" method="post" action="~/Post/MovieLanguageAddPost.cshtml">
+            <form class="form-horizonta">
                 <div class="col-xs-9 col-md-6">
                     <div class="form-group">
                         <label for="filmDil">Film Dili Ekle</label>
                         <input type="text" class="form-control" id="filmDil" name="filmDil">
                     </div>
-                    <button type="submit" class="btn btn-default" name="filmDilEkle">Dil Gönder Gelsin</button>
+                    <button type="submit" class="btn btn-default" name="filmDilEkle" onclick="LanguageAdd()">Dil Gönder Gelsin</button>
                 </div>
             </form>
             <!-- @@@@@@ Tür Ekle @@@@@@ -->
-            <form class="form-horizonta" method="post" action="~/Post/MovieTypeAddPost.cshtml">
+            <form class="form-horizonta">
                 <div class="col-xs-9 col-md-6">
                     <div class="form-group">
                         <label for="filmTip">Film Türü Ekle</label>
-                        <input type="text" class="form-control" id="filmTip" name="filmTip">
+                        <input id="filmTip" type="text" class="form-control" name="filmTip">
                     </div>
-                    <button type="submit" class="btn btn-default" name="filmTipEkle">Tür Gönder Gelsin</button>
+                    <button type="submit" class="btn btn-default" name="filmTipEkle" onclick="TypeAdd()">Tür Gönder Gelsin</button>
                 </div>
             </form>
             <div class="col-xs-9 col-md-6">
@@ -53,18 +53,20 @@
                 <div class="col-xs-9 col-md-6">
                     <div class="form-group">
                         <label for="yonetmenAdi">Yönetmen Ekle</label>
-                        <input  type="text" class="form-control" id="yonetmenAdi" name="yonetmenAdi">
+                        <input id="yonetmenAdi" type="text" class="form-control" name="yonetmenAdi">
                     </div>
-                    <button id="btn-yonetmen" type="submit" class="btn btn-default" name="yonetmenEkle">Yönetmen Gönder Gelsin</button>
+                    <button id="btn-yonetmen" type="submit" class="btn btn-default" name="yonetmenEkle" onclick="DirectorAdd()">Yönetmen Gönder Gelsin</button>
+                    <span id="sonuc"></span>
                 </div>
+            </form>
                 <div class="col-xs-9 col-md-6">
 
                 </div>
-            </form>
+            
         </div>
     </div>
     
-    @*<form class="form-horizonta" method="post" action="~/MovieLanguageAddPost.cshtml">
+    @*<form class="form-horizonta">
         <div class="container">
             <div class="form-group">
                 <label for="filmDil">Film Dili Ekle</label>
@@ -82,15 +84,67 @@
     }
     <!-- @@@@@@ Yönetmen Ekle @@@@@@ -->
     <script>
-        $("#btn-yonetmen").on("click", function () {
-            
-            var yonetmenA = document.getElementById("yonetmenAdi").value;
-            window.alert(yonetmenA," Başarıyla Eklendi")
-           @Directors.directorName = yonetmenA;
-           @db.Directors.Add(Directors);
-           @db.SaveChanges();
-           window.alert(yonetmenA," Başarıyla Eklendi")
-        });
+        function DirectorAdd() {
+            $.ajax({
+                type: "POST",
+                url: "Post/DirectorAddPost.cshtml",
+                data:
+                {
+                    directorPost: escape($('#yonetmenAdi').val())
+                },
+                success: function (result) {
+                    $('#sonuc').html(result);
+                },
+                error: function () {
+                    //alert('Sorun Oluştu Hayırlısı :D ');
+                }
+            });
+        }
+        function TypeAdd() {
+            $.ajax({
+                type: "POST",
+                url: "Post/MovieTypeAddPost.cshtml",
+                data:
+                {
+                    TypePost: escape($('#filmTip').val())
+                },
+                success: function (result) {
+                    $('#sonuc').html(result);
+                },
+                error: function () {
+                    //alert('Sorun Oluştu Hayırlısı :D ');
+                }
+            });
+        }
+        function LanguageAdd() {
+            $.ajax({
+                type: "POST",
+                url: "Post/MovieLanguageAddPost.cshtml",
+                data:
+                {
+                    LanguagePost: escape($('#filmDil').val())
+                },
+                success: function (result) {
+                    $('#sonuc').html(result);
+                },
+                error: function () {
+                    //alert('Sorun Oluştu Hayırlısı :D ');
+                }
+            });
+        }
+        
+        
+
+
+        //$("#btn-yonetmenn").on("click", function () {
+        //    var yonetmenA = document.getElementById("yonetmenAdi").value;
+        //    $.post("Post/DirectorAddPost.cshtml", yonetmenA);
+        //    $.ajax({
+        //        type: "POST",
+        //        url: "Post/DirectorAddPost.cshtml",
+        //        data: yonetmenA
+        //        }
+        //})
         
     </script>
 </body>
