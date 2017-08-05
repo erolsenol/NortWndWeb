@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+
+
+    @{
+        if (IsPost)
+        {
+            NorthwndWeb.DataContext db = new NorthwndWeb.DataContext();
+            NorthwndWeb.Entities.User yeniUser = new NorthwndWeb.Entities.User();
+
+            string kadi = Request.Form["newUserName"];
+            string ksifre = Request.Form["newUserPass"];
+            string kmail = Request.Form["newUserMail"];
+
+
+            yeniUser.UserName = kadi;
+            yeniUser.UserMail = ksifre;
+            yeniUser.UserPass = kmail;
+
+            db.Users.Add(yeniUser);
+            db.SaveChanges();
+        }
+        <h1>Başarılı</h1>
+    }
+</body>
+</html>

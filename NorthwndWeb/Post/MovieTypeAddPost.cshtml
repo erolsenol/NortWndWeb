@@ -9,14 +9,17 @@
     @if (IsPost)
     {
         NorthwndWeb.DataContext db = new NorthwndWeb.DataContext();
-
         NorthwndWeb.Entities.MovieType movieTypeAdd = new NorthwndWeb.Entities.MovieType();
 
-        
-        string filmTipi = Request.Form["TypePost"];  
-        movieTypeAdd.MovieTypeName = filmTipi;
+        string tip1 = Request.Form["movType1"];
+        string tip2 = Request.Form["movType2"];
+        string tip3 = Request.Form["movType3"];
+
+        movieTypeAdd.MovieTypeName = tip1;
+
         db.MovieTypes.Add(movieTypeAdd);
         db.SaveChanges();
+
 
     }
      <a class="btn btn-default" href="~/DataAdd.cshtml" role="button">Geri Gel</a>

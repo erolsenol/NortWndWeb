@@ -15,6 +15,9 @@ namespace NorthwndWeb.Entities
         [Column("TypeName")]
         public string MovieTypeName { get; set; }
 
+        //[Column("TypeColumn")]
+        //public int MovieTypeColumn { get; set; }
+
         public virtual IList<Movie> Movies { get; set; }
     }
 }

@@ -112,10 +112,18 @@
     <Content Include="DataAdd.cshtml" />
     <Content Include="Post\MovieLanguageAddPost.cshtml" />
     <Content Include="Deneme.cshtml" />
-    <Content Include="sablon.cshtml" />
     <Content Include="Post\DirectorAddPost.cshtml" />
     <Content Include="Post\DenemePost.cshtml" />
     <Content Include="Bot.cshtml" />
+    <Content Include="MovieAdmin\blank-page.cshtml" />
+    <Content Include="MovieAdmin\bootstrap-elements.cshtml" />
+    <Content Include="MovieAdmin\bootstrap-grid.cshtml" />
+    <Content Include="MovieAdmin\charts.cshtml" />
+    <Content Include="MovieAdmin\forms.cshtml" />
+    <Content Include="MovieAdmin\index.cshtml" />
+    <Content Include="MovieAdmin\index-rtl.cshtml" />
+    <Content Include="MovieAdmin\tables.cshtml" />
+    <Content Include="Data.cshtml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
     <Content Include="Scripts\jquery-3.1.1.min.js" />
@@ -143,7 +151,7 @@
     <Content Include="UserAdd.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="UserAddPost.cshtml" />
+    <Content Include="Post\UserAddPost.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="UserUpdatePost.cshtml" />
