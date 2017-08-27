@@ -203,15 +203,15 @@
                         <form class="form-horizonta" id="typeForm">
                         <div class="form-group">
                             <label>1. Kolon</label>
-                            <input name="movType1" class="form-control" placeholder="Film Türünü Giriniz">
+                            <input name="filmtip"id="filmtip" class="form-control" placeholder="Film Türünü Giriniz">
                         </div>
                         <div class="form-group">
                                 <label>2. Kolon</label>
-                                <input name="movType2" class="form-control" placeholder="Film Türünü Giriniz">
+                               
                         </div>
                         <div class="form-group">
                                 <label>3. Kolon</label>
-                                <input name="movType3" class="form-control" placeholder="Film Türünü Giriniz">
+                               
                         </div>
                             <button type="submit" id="btnTur" class="btn btn-default" onclick="TypeAdd()">Tür Ekle</button>
                             </form>
@@ -221,27 +221,21 @@
         </div>
     </div>
 
-  
     <script>
         function TypeAdd() {
-            window.alert("girildi");
             $.ajax({
                 type: "POST",
-                url: "~/Post/MovieTypeAddPost.cshtml",
+                url: "~/MovieAdmin/Post/TypePost.cshtml",
                 data:
                 {
-                    movType1: escape($('#movType1').val()),
-                    movType2: escape($('#movType2').val()),
-                    movType3: escape($('#movType3').val())
+                    TypePost: escape($('#filmTip').val())
                 },
                 success: function (result) {
                     $('#sonuc').html(result);
                 },
-                error: function () {
-                    alert('Sorun Oluştu Hayırlısı :D ');
-                }
+                error: function () {}
             });
-        }   
+        }  
     </script>
 </body>
 </html>
